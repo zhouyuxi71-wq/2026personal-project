@@ -1,131 +1,100 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>2026–2027 · 流动中的研究者</title>
 <style>
 :root{--bg:#f7f3ed;--card:#fffdf9;--ink:#25231f;--muted:#777269;--line:#e6dfd5;--accent:#8b6652;--accent2:#d9c5b5}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif}
-a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:28px 20px 70px}.hero{padding:42px 0 26px}.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-h1{font-size:clamp(34px,6vw,64px);line-height:1.05;margin:10px 0 14px;letter-spacing:-.04em}.hero p{max-width:720px;color:var(--muted);font-size:17px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}
+.wrap{max-width:1160px;margin:auto;padding:28px 20px 70px}.hero{padding:42px 0 26px}.eyebrow{font-size:12px;letter-spacing:.16em;color:var(--accent)}
+h1{font-size:clamp(34px,6vw,64px);line-height:1.05;margin:10px 0 14px;letter-spacing:-.04em}.hero p{max-width:760px;color:var(--muted);font-size:17px}
 nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 30px}nav a{background:var(--card);border:1px solid var(--line);padding:7px 12px;border-radius:999px;text-decoration:none;font-size:13px}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{grid-column:span 6;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 5px 20px #3a2d1a08}.wide{grid-column:span 12}.third{grid-column:span 4}
-h2{font-size:22px;margin:0 0 5px}h3{font-size:16px;margin:18px 0 7px}.sub{color:var(--muted);font-size:13px}
-.kpi{font-size:38px;font-weight:700;line-height:1;margin:8px 0}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.tag{padding:5px 9px;border-radius:999px;background:#f0e9e1;color:#655344;font-size:12px}
+h2{font-size:22px;margin:0 0 5px}h3{font-size:16px;margin:18px 0 7px}.sub{color:var(--muted);font-size:13px}.kpi{font-size:38px;font-weight:700;line-height:1;margin:8px 0}
 input,select,textarea{width:100%;font:inherit;border:1px solid var(--line);background:#fffefa;border-radius:10px;padding:9px;color:var(--ink)}textarea{min-height:100px;resize:vertical}.field{margin:10px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
-.progress{height:9px;background:#eee8df;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:var(--accent);transition:.2s}
 button{border:0;background:var(--ink);color:white;border-radius:10px;padding:9px 14px;cursor:pointer}button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.timeline{border-left:2px solid var(--accent2);padding-left:18px}.milestone{margin:0 0 18px}.milestone b{display:block}.check{display:flex;gap:8px;align-items:flex-start;margin:7px 0}.check input{width:auto;margin-top:5px}
-footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}
-@media(max-width:760px){.card,.third{grid-column:span 12}.wrap{padding:18px 14px 50px}.hero{padding-top:25px}}
-</style>
-</head>
-<body>
-<div class="wrap">
-<section class="hero">
-<div class="eyebrow">2026–2027 · Personal Research OS</div>
-<h1>流动中的研究者</h1>
+.progress{height:9px;background:#eee8df;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:var(--accent)}
+.checkgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:8px 0}.check{display:flex;gap:8px;align-items:center;padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:#fffefa}.check input{width:auto}
+.timeline{border-left:2px solid var(--accent2);padding-left:18px}.milestone{margin:0 0 18px}.milestone b{display:block}
+.log-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}.log-toolbar>*{width:auto}.log-list{display:grid;gap:8px}.log-item{border:1px solid var(--line);border-radius:12px;background:#fffefa;padding:11px 13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}.log-item:hover{border-color:var(--accent2)}.log-main b{display:block}.log-main span{font-size:12px;color:var(--muted)}.log-arrow{color:var(--accent);font-size:18px}
+.modal{display:none;position:fixed;inset:0;background:#25231f66;z-index:10;padding:20px;align-items:center;justify-content:center}.modal.show{display:flex}.modal-box{width:min(620px,100%);max-height:90vh;overflow:auto;background:var(--card);border-radius:20px;padding:24px;border:1px solid var(--line)}.modal-head{display:flex;justify-content:space-between}.close{background:transparent;color:var(--ink);font-size:24px;padding:0}.detail{border-top:1px solid var(--line);margin-top:15px;padding-top:15px}.detailrow{margin:10px 0}.detailrow b{display:block;font-size:12px;color:var(--muted)}
+.tag{padding:5px 9px;border-radius:999px;background:#f0e9e1;color:#655344;font-size:12px}.row{display:flex;gap:12px;flex-wrap:wrap}
+footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}@media(max-width:760px){.card,.third{grid-column:span 12}.wrap{padding:18px 14px 50px}.checkgrid{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<section class="hero"><div class="eyebrow">2026–2027 · PERSONAL RESEARCH OS</div><h1>流动中的研究者</h1>
 <p>一张用来管理法语、写作、Master → PhD，以及足球评论账号的个人地图。不是把生活变成 KPI，而是记录自己正在往哪里流动。</p>
-<nav>
-<a href="#today">今日</a><a href="#french">法语</a><a href="#writing">写作</a><a href="#academic">Master → PhD</a><a href="#football">足球</a><a href="#radar">月度回看</a>
-</nav>
-</section>
+<nav><a href="#today">今日</a><a href="#french">法语</a><a href="#writing">写作</a><a href="#academic">Master → PhD</a><a href="#football">足球</a><a href="#review">月度回看</a></nav></section>
 
 <div class="grid">
-<section class="card wide" id="today">
-<h2>今日 · Today</h2><div class="sub">每天只需要更新这一块。</div>
-<div class="grid" style="margin-top:10px">
-<div class="third"><div class="sub">法语学习（小时）</div><input id="todayHours" type="number" min="0" step=".25" placeholder="0"></div>
-<div class="third"><div class="sub">今天写了什么</div><input id="todayWriting" placeholder="一句话即可"></div>
-<div class="third"><div class="sub">足球账号</div><input id="todayFootball" placeholder="选题 / 发布 / 数据"></div>
-</div>
-<div class="field"><label>今天最重要的一件事</label><input id="todayFocus" placeholder="只写一件"></div>
-<button onclick="saveToday()">保存今天</button>
-<span id="saveMsg" class="sub" style="margin-left:8px"></span>
-</section>
+<section class="card wide" id="today"><h2>今日 · Today</h2><div class="sub">每天更新这一块；今天的内容也会进入「月度回看」。</div>
+<div class="grid"><div class="third"><div class="field"><label>法语学习（小时）</label><input id="todayHours" type="number" min="0" step=".25"></div></div>
+<div class="third"><div class="field"><label>今天写了什么</label><input id="todayWriting"></div></div><div class="third"><div class="field"><label>足球账号</label><input id="todayFootball"></div></div></div>
+<div class="field"><label>今天最重要的一件事</label><input id="todayFocus"></div><button onclick="saveToday()">保存今天</button><span id="saveMsg" class="sub"></span></section>
 
-<section class="card" id="french">
-<h2>🇫🇷 法语</h2><div class="sub">目标：2027 年 2 月底 B1</div>
-<div class="kpi" id="totalHours">0 h</div><div class="sub">累计记录学习时长</div>
-<div class="progress" style="margin:12px 0"><div class="bar" id="frenchBar"></div></div>
+<section class="card" id="french"><h2>🇫🇷 法语</h2><div class="sub">目标：2027 年 2 月底 B1</div><div class="kpi" id="totalHours">0 h</div><div class="sub">累计记录学习时长</div>
+<div class="progress"><div class="bar" id="frenchBar"></div></div>
 <div class="field"><label>新增学习记录（小时）</label><input id="fh" type="number" min="0" step=".25" placeholder="例如 1.5"></div>
-<div class="field"><label>学习内容</label><select id="fc"><option>语法</option><option>词汇</option><option>听力</option><option>阅读</option><option>写作</option><option>口语</option><option>综合</option></select></div>
-<div class="field"><label>备注</label><input id="fn" placeholder="今天学了什么？"></div>
-<button onclick="addFrench()">记录</button>
-</section>
+<div class="field"><label>今天学了哪些内容（可多选）</label></div>
+<div class="checkgrid"><label class="check"><input name="fc" type="checkbox" value="语法">语法</label><label class="check"><input name="fc" type="checkbox" value="词汇">词汇</label>
+<label class="check"><input name="fc" type="checkbox" value="听力">听力</label><label class="check"><input name="fc" type="checkbox" value="阅读">阅读</label>
+<label class="check"><input name="fc" type="checkbox" value="写作">写作</label><label class="check"><input name="fc" type="checkbox" value="口语">口语</label><label class="check"><input name="fc" type="checkbox" value="综合">综合</label></div>
+<div class="field"><label>当日重点语法</label><input id="fgrammar" placeholder="例如：宾语代词前置、si 条件句"></div>
+<div class="field"><label>今天具体学了什么</label><textarea id="fn" placeholder="例如：完成第 3 课听力；复习 lequel / laquelle；做了 20 道练习题"></textarea></div>
+<button onclick="addFrench()">记录今天</button></section>
 
-<section class="card" id="writing">
-<h2>✍️ 写作 / 研究</h2><div class="sub">写作不是副业：它也是寻找博士问题的方法。</div>
-<div class="kpi" id="articleCount">0</div><div class="sub">已记录文章 / 研究笔记</div>
-<div class="field"><label>文章目录（每行一篇，可写：日期｜标题｜主题｜核心问题）</label>
-<textarea id="articles" placeholder="2026-09｜……｜县城酷儿生活｜为什么有人选择留下？"></textarea></div>
-<div class="field"><label>最近反复出现的主题</label><input id="themes" placeholder="例如：女性劳动、地方社会、污染焦虑、教育制度"></div>
-<button onclick="saveWriting()">保存写作地图</button>
-</section>
+<section class="card" id="writing"><h2>✍️ 写作 / 研究</h2><div class="sub">每篇文章单独记录，方便以后寻找博士研究问题。</div><div class="kpi" id="articleCount">0</div><div class="sub">已记录文章 / 研究笔记</div>
+<h3>新增文章</h3><div class="grid">
+<div class="third"><div class="field"><label>标题</label><input id="atitle"></div></div><div class="third"><div class="field"><label>日期</label><input id="adate" type="date"></div></div><div class="third"><div class="field"><label>主题</label><input id="atheme"></div></div>
+<div class="third"><div class="field"><label>涉及地区</label><input id="aregion"></div></div><div class="third"><div class="field"><label>核心问题</label><input id="aquestion"></div></div><div class="third"><div class="field"><label>是否有田野材料</label><select id="afield"><option>有</option><option>没有</option><option>部分有</option></select></div></div></div>
+<div class="field"><label>是否值得以后扩展</label><select id="aexpand"><option>值得</option><option>暂不确定</option><option>不值得</option></select></div>
+<button onclick="addArticle()">加入文章目录</button>
+<div class="field"><label>最近反复出现的主题</label><input id="themes" placeholder="例如：女性劳动、地方社会、污染焦虑、教育制度"></div></section>
 
-<section class="card wide" id="academic">
-<h2>🎓 Master → PhD</h2><div class="sub">2026–2027：补语言与 China Studies；之后进入更明确的博士研究。</div>
-<div class="timeline" style="margin-top:18px">
-<div class="milestone"><b>现在 → 2026 秋</b><span class="sub">法语 B1 路线；建立法国 China Studies / social sciences 项目地图。</span></div>
-<div class="milestone"><b>2026 秋 → 冬</b><span class="sub">继续写作与田野观察；记录反复出现的问题，而不是急着定题。</span></div>
-<div class="milestone"><b>2027 春</b><span class="sub">确定 Master shortlist；开始系统看课程、研究团队、导师与申请要求。</span></div>
-<div class="milestone"><b>长期</b><span class="sub">Master → PhD：Gender × China × social sciences，逐步形成自己的研究问题。</span></div>
-</div>
-<h3>当前研究雷达</h3>
-<div class="row">
-<span class="tag">Gender × authoritarianism</span><span class="tag">女性劳动</span><span class="tag">县城酷儿生活</span><span class="tag">社会运动</span><span class="tag">污染焦虑</span><span class="tag">中国教育</span>
-</div>
-<div class="field"><label>我最近最想追的一个问题</label><textarea id="phdQuestion" placeholder="先写问题，不需要马上写成研究计划。"></textarea></div>
-<button onclick="saveAcademic()">保存</button>
-</section>
+<section class="card wide" id="academic"><h2>🎓 Master → PhD</h2><div class="sub">2026–2027：补语言与 China Studies；之后进入更明确的博士研究。</div>
+<div class="timeline"><div class="milestone"><b>现在 → 2026 秋</b><span class="sub">法语 B1；建立法国 China Studies / social sciences 项目地图。</span></div>
+<div class="milestone"><b>2026 秋 → 冬</b><span class="sub">继续写作与田野观察；记录反复出现的问题。</span></div><div class="milestone"><b>2027 春</b><span class="sub">确定 Master shortlist；系统看课程、研究团队、导师与申请要求。</span></div>
+<div class="milestone"><b>长期</b><span class="sub">Master → PhD：Gender × China × social sciences。</span></div></div>
+<h3>当前研究雷达</h3><div class="row"><span class="tag">Gender × authoritarianism</span><span class="tag">女性劳动</span><span class="tag">县城酷儿生活</span><span class="tag">社会运动</span><span class="tag">污染焦虑</span><span class="tag">中国教育</span></div>
+<div class="field"><label>我最近最想追的一个问题</label><textarea id="phdQuestion"></textarea></div><button onclick="saveAcademic()">保存</button></section>
 
-<section class="card" id="football">
-<h2>⚽ 足球评论 / 小红书</h2><div class="sub">把足球当成另一种观察社会、性别与身份的入口。</div>
-<div class="grid" style="margin-top:12px">
-<div class="third"><div class="sub">本月发布</div><input id="posts" type="number" min="0" value="0"></div>
-<div class="third"><div class="sub">本月目标</div><input id="postGoal" type="number" min="1" value="4"></div>
-<div class="third"><div class="sub">本月最想做的题</div><input id="footballTopic" placeholder="例如：法国队 / 性别 / 种族"></div>
-</div>
-<div class="progress" style="margin:14px 0"><div class="bar" id="footballBar"></div></div>
-<button onclick="saveFootball()">保存</button>
-</section>
+<section class="card wide" id="football"><h2>⚽ 足球评论 / 小红书</h2><div class="sub">记录每一篇发布及其实际传播数据。</div>
+<div class="grid"><div class="third"><div class="field"><label>发布日期</label><input id="fdate" type="date"></div></div><div class="third"><div class="field"><label>标题</label><input id="ftitle"></div></div><div class="third"><div class="field"><label>点赞收藏数</label><input id="flikes" type="number" min="0" value="0"></div></div>
+<div class="third"><div class="field"><label>浏览量</label><input id="fviews" type="number" min="0" value="0"></div></div><div class="third"><div class="field"><label>评论数</label><input id="fcomments" type="number" min="0" value="0"></div></div></div>
+<button onclick="addFootball()">记录一篇</button></section>
 
-<section class="card" id="radar">
-<h2>🧭 月度回看</h2><div class="sub">每月底问自己：我是在完成任务，还是在越来越接近自己真正想研究的东西？</div>
-<div class="field"><label>法语投入：<span id="fv">5</span>/10</label><input id="frenchScore" type="range" min="0" max="10" value="5" oninput="fv.textContent=this.value"></div>
-<div class="field"><label>写作 / 研究：<span id="wv">5</span>/10</label><input id="writingScore" type="range" min="0" max="10" value="5" oninput="wv.textContent=this.value"></div>
-<div class="field"><label>Master / PhD：<span id="av">5</span>/10</label><input id="academicScore" type="range" min="0" max="10" value="5" oninput="av.textContent=this.value"></div>
-<div class="field"><label>足球账号：<span id="bv">5</span>/10</label><input id="footballScore" type="range" min="0" max="10" value="5" oninput="bv.textContent=this.value"></div>
-<div class="field"><label>本月复盘</label><textarea id="reflection" placeholder="哪些事情让我持续好奇？哪些只是为了完成？哪些主题开始重复出现？"></textarea></div>
-<button onclick="saveRadar()">保存本月复盘</button>
-</section>
-</div>
-<footer>数据仅保存在你当前浏览器的 localStorage 中。GitHub Pages 负责托管网页，不会自动同步你的记录。</footer>
-</div>
+<section class="card wide" id="review"><h2>🧭 月度回看</h2><div class="sub">选择月份后，可以看到这个月已经完成的具体内容；点击任何一条记录，可以打开当天的完整内容。</div>
+<div class="log-toolbar"><label class="sub">月份</label><input id="reviewMonth" type="month"><button class="ghost" onclick="setCurrentMonth()">回到本月</button></div>
+<div class="grid"><div class="third"><div class="sub">本月法语</div><div class="kpi" id="monthFrench">0 h</div></div><div class="third"><div class="sub">本月文章</div><div class="kpi" id="monthArticles">0</div></div><div class="third"><div class="sub">本月足球发布</div><div class="kpi" id="monthFootball">0</div></div></div>
+<h3>本月具体内容</h3><div class="log-list" id="reviewList"></div>
+<h3>研究复盘</h3><div class="field"><label>法语投入：<span id="fv">5</span>/10</label><input id="frenchScore" type="range" min="0" max="10" value="5"></div>
+<div class="field"><label>写作 / 研究：<span id="wv">5</span>/10</label><input id="writingScore" type="range" min="0" max="10" value="5"></div>
+<div class="field"><label>Master / PhD：<span id="av">5</span>/10</label><input id="academicScore" type="range" min="0" max="10" value="5"></div>
+<div class="field"><label>足球账号：<span id="bv">5</span>/10</label><input id="footballScore" type="range" min="0" max="10" value="5"></div>
+<div class="field"><label>本月复盘</label><textarea id="reflection" placeholder="哪些事情让我持续好奇？哪些主题开始重复出现？"></textarea></div><button onclick="saveRadar()">保存本月复盘</button></section>
+</div><footer>数据保存在当前浏览器的 localStorage 中。GitHub Pages 负责托管网页，不会自动跨设备同步。</footer></div>
+
+<div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" onclick="closeModal()">×</button></div><div id="modalBody" class="detail"></div></div></div>
 
 <script>
-const K='researchOS_2026_2027_v1';
-let data=JSON.parse(localStorage.getItem(K)||'{"hours":0,"articles":"","themes":"","question":"","posts":0,"goal":4,"topic":"","today":{},"radar":{}}');
+const K='researchOS_2026_2027_v3';let data=JSON.parse(localStorage.getItem(K)||'null');
+if(!data){let o=JSON.parse(localStorage.getItem('researchOS_2026_2027_v2')||localStorage.getItem('researchOS_2026_2027_v1')||'{}');data={hours:o.hours||0,articles:Array.isArray(o.articles)?o.articles:[],themes:o.themes||'',question:o.question||'',today:o.today||{},frenchLogs:o.frenchLogs||[],footballLogs:o.footballLogs||[],radar:o.radar||{}}}
+data.frenchLogs=data.frenchLogs||[];data.footballLogs=data.footballLogs||[];data.articles=Array.isArray(data.articles)?data.articles:[];
+const iso=()=>new Date().toISOString().slice(0,10),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),br=s=>esc(s).replace(/\n/g,'<br>');
 function save(){localStorage.setItem(K,JSON.stringify(data))}
-function load(){
-totalHours.textContent=data.hours.toFixed(2)+' h';
-frenchBar.style.width=Math.min(data.hours/300*100,100)+'%';
-articles.value=data.articles||''; articleCount.textContent=(data.articles||'').split('\\n').filter(x=>x.trim()).length;
-themes.value=data.themes||''; phdQuestion.value=data.question||'';
-posts.value=data.posts||0; postGoal.value=data.goal||4; footballTopic.value=data.topic||'';
-footballBar.style.width=Math.min((data.posts||0)/(data.goal||4)*100,100)+'%';
-todayHours.value=data.today.hours||''; todayWriting.value=data.today.writing||''; todayFootball.value=data.today.football||''; todayFocus.value=data.today.focus||'';
-reflection.value=data.radar.reflection||'';
-['frenchScore','writingScore','academicScore','footballScore'].forEach((id,i)=>{let v=data.radar[id]??5; document.getElementById(id).value=v; document.getElementById(['fv','wv','av','bv'][i]).textContent=v})
-}
-function addFrench(){let h=parseFloat(fh.value)||0;data.hours+=h;save();load();fh.value='';fn.value=''}
-function saveToday(){data.today={hours:todayHours.value,writing:todayWriting.value,football:todayFootball.value,focus:todayFocus.value};save();saveMsg.textContent='已保存';setTimeout(()=>saveMsg.textContent='',1200)}
-function saveWriting(){data.articles=articles.value;data.themes=themes.value;save();load()}
+function load(){totalHours.textContent=(data.hours||0).toFixed(2)+' h';frenchBar.style.width=Math.min((data.hours||0)/300*100,100)+'%';articleCount.textContent=data.articles.length;themes.value=data.themes||'';phdQuestion.value=data.question||'';todayHours.value=data.today.hours||'';todayWriting.value=data.today.writing||'';todayFootball.value=data.today.football||'';todayFocus.value=data.today.focus||''}
+function addFrench(){let h=+fh.value||0,c=[...document.querySelectorAll('[name=fc]:checked')].map(x=>x.value);if(!h&&!fn.value.trim()&&!c.length&&!fgrammar.value.trim()){alert('至少填写一点今天的学习记录。');return}data.hours+=h;data.frenchLogs.push({id:Date.now(),date:iso(),hours:h,contents:c,grammar:fgrammar.value.trim(),note:fn.value.trim()});save();fh.value='';fgrammar.value='';fn.value='';document.querySelectorAll('[name=fc]').forEach(x=>x.checked=false);load();render()}
+function saveToday(){data.today={date:iso(),hours:todayHours.value,writing:todayWriting.value,football:todayFootball.value,focus:todayFocus.value};save();saveMsg.textContent=' 已保存';setTimeout(()=>saveMsg.textContent='',1200);render()}
+function addArticle(){if(!atitle.value.trim()){alert('请填写标题。');return}data.articles.push({id:Date.now(),title:atitle.value.trim(),date:adate.value||iso(),theme:atheme.value.trim(),region:aregion.value.trim(),question:aquestion.value.trim(),field:afield.value,expand:aexpand.value});save();atitle.value='';adate.value='';atheme.value='';aregion.value='';aquestion.value='';load();render()}
+function addFootball(){if(!ftitle.value.trim()){alert('请填写标题。');return}data.footballLogs.push({id:Date.now(),date:fdate.value||iso(),title:ftitle.value.trim(),likes:+flikes.value||0,views:+fviews.value||0,comments:+fcomments.value||0});save();ftitle.value='';flikes.value=fviews.value=fcomments.value=0;fdate.value='';render()}
 function saveAcademic(){data.question=phdQuestion.value;save()}
-function saveFootball(){data.posts=parseInt(posts.value)||0;data.goal=parseInt(postGoal.value)||4;data.topic=footballTopic.value;save();load()}
-function saveRadar(){['frenchScore','writingScore','academicScore','footballScore'].forEach(id=>data.radar[id]=+document.getElementById(id).value);data.radar.reflection=reflection.value;save()}
-load();
-</script>
-</body>
-</html>
+function saveRadar(){let m=reviewMonth.value||iso().slice(0,7);data.radar[m]={french:+frenchScore.value,writing:+writingScore.value,academic:+academicScore.value,football:+footballScore.value,reflection:reflection.value};save()}
+function setCurrentMonth(){reviewMonth.value=iso().slice(0,7);render()}
+function render(){let m=reviewMonth.value||iso().slice(0,7),L=[];let fs=data.frenchLogs.filter(x=>x.date.startsWith(m)),as=data.articles.filter(x=>x.date.startsWith(m)),bs=data.footballLogs.filter(x=>x.date.startsWith(m));monthFrench.textContent=fs.reduce((a,x)=>a+(+x.hours||0),0).toFixed(2)+' h';monthArticles.textContent=as.length;monthFootball.textContent=bs.length;
+fs.forEach(x=>L.push({type:'🇫🇷 法语',date:x.date,title:(x.contents.length?x.contents.join(' + '):'法语学习')+(x.grammar?' · '+x.grammar:''),body:`<div class="detailrow"><b>学习时长</b>${x.hours||0} 小时</div><div class="detailrow"><b>学习内容</b>${esc(x.contents.join('、')||'未分类')}</div><div class="detailrow"><b>当日重点语法</b>${esc(x.grammar||'—')}</div><div class="detailrow"><b>今天具体学了什么</b>${br(x.note||'—')}</div>`}));
+as.forEach(x=>L.push({type:'✍️ 写作',date:x.date,title:x.title,body:`<div class="detailrow"><b>日期</b>${x.date}</div><div class="detailrow"><b>主题</b>${esc(x.theme||'—')}</div><div class="detailrow"><b>涉及地区</b>${esc(x.region||'—')}</div><div class="detailrow"><b>核心问题</b>${esc(x.question||'—')}</div><div class="detailrow"><b>是否有田野材料</b>${esc(x.field)}</div><div class="detailrow"><b>是否值得以后扩展</b>${esc(x.expand)}</div>`}));
+bs.forEach(x=>L.push({type:'⚽ 足球',date:x.date,title:x.title,body:`<div class="detailrow"><b>发布日期</b>${x.date}</div><div class="detailrow"><b>点赞收藏数</b>${x.likes}</div><div class="detailrow"><b>浏览量</b>${x.views}</div><div class="detailrow"><b>评论数</b>${x.comments}</div>`}));
+L.sort((a,b)=>b.date.localeCompare(a.date));window.logs=L;reviewList.innerHTML=L.length?L.map((x,i)=>`<div class="log-item" onclick="openLog(${i})"><div class="log-main"><b>${esc(x.title)}</b><span>${x.type} · ${x.date}</span></div><div class="log-arrow">›</div></div>`).join(''):'<div class="sub">这个月还没有记录。</div>';let r=data.radar[m]||{};frenchScore.value=r.french??5;writingScore.value=r.writing??5;academicScore.value=r.academic??5;footballScore.value=r.football??5;reflection.value=r.reflection||'';fv.textContent=frenchScore.value;wv.textContent=writingScore.value;av.textContent=academicScore.value;bv.textContent=footballScore.value}
+function openLog(i){let x=logs[i];modalTitle.textContent=x.title;modalBody.innerHTML=`<div class="sub">${x.type} · ${x.date}</div>`+x.body;modal.classList.add('show')}function closeModal(){modal.classList.remove('show')}modal.onclick=e=>{if(e.target===modal)closeModal()}
+reviewMonth.value=iso().slice(0,7);load();render();
+</script></body></html>
