@@ -17,9 +17,10 @@ button{border:0;background:var(--ink);color:white;border-radius:10px;padding:9px
 .checkgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:8px 0}.check{display:flex;gap:8px;align-items:center;padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:#fffefa}.check input{width:auto}
 .timeline{border-left:2px solid var(--accent2);padding-left:18px}.milestone{margin:0 0 18px}.milestone b{display:block}
 .log-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}.log-toolbar>*{width:auto}.log-list{display:grid;gap:8px}.log-item{border:1px solid var(--line);border-radius:12px;background:#fffefa;padding:11px 13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}.log-item:hover{border-color:var(--accent2)}.log-main b{display:block}.log-main span{font-size:12px;color:var(--muted)}.log-arrow{color:var(--accent);font-size:18px}
+.review-cats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 22px}.review-cat{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:#fffefa;border-radius:14px;padding:14px;cursor:pointer;transition:.15s}.review-cat:hover{border-color:var(--accent2);transform:translateY(-1px)}.cat-icon{font-size:22px}.review-cat b{display:block}.review-cat span{display:block;color:var(--muted);font-size:12px}.cat-arrow{margin-left:auto;color:var(--accent);font-size:20px}.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.score-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fffefa}.score-card span{display:block;font-weight:600}.score-card strong{display:block;font-size:34px;line-height:1.2;margin:6px 0}.score-card small{color:var(--muted)}.summary-box{border:1px solid var(--line);background:#fffefa;border-radius:14px;padding:16px;line-height:1.8}.summary-box p{margin:0 0 10px}.summary-box p:last-child{margin-bottom:0}
 .modal{display:none;position:fixed;inset:0;background:#25231f66;z-index:10;padding:20px;align-items:center;justify-content:center}.modal.show{display:flex}.modal-box{width:min(620px,100%);max-height:90vh;overflow:auto;background:var(--card);border-radius:20px;padding:24px;border:1px solid var(--line)}.modal-head{display:flex;justify-content:space-between}.close{background:transparent;color:var(--ink);font-size:24px;padding:0}.detail{border-top:1px solid var(--line);margin-top:15px;padding-top:15px}.detailrow{margin:10px 0}.detailrow b{display:block;font-size:12px;color:var(--muted)}
 .tag{padding:5px 9px;border-radius:999px;background:#f0e9e1;color:#655344;font-size:12px}.row{display:flex;gap:12px;flex-wrap:wrap}
-footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}@media(max-width:760px){.card,.third{grid-column:span 12}.wrap{padding:18px 14px 50px}.checkgrid{grid-template-columns:1fr}}
+footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}@media(max-width:760px){.card,.third{grid-column:span 12}.review-cats,.score-grid{grid-template-columns:1fr 1fr}.wrap{padding:18px 14px 50px}.checkgrid{grid-template-columns:1fr}}
 </style></head>
 <body><div class="wrap">
 <section class="hero"><div class="eyebrow">2026–2027 · PERSONAL RESEARCH OS</div><h1>流动中的研究者</h1>
@@ -56,45 +57,117 @@ footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}@medi
 <div class="milestone"><b>2026 秋 → 冬</b><span class="sub">继续写作与田野观察；记录反复出现的问题。</span></div><div class="milestone"><b>2027 春</b><span class="sub">确定 Master shortlist；系统看课程、研究团队、导师与申请要求。</span></div>
 <div class="milestone"><b>长期</b><span class="sub">Master → PhD：Gender × China × social sciences。</span></div></div>
 <h3>当前研究雷达</h3><div class="row"><span class="tag">Gender × authoritarianism</span><span class="tag">女性劳动</span><span class="tag">县城酷儿生活</span><span class="tag">社会运动</span><span class="tag">污染焦虑</span><span class="tag">中国教育</span></div>
-<div class="field"><label>我最近最想追的一个问题</label><textarea id="phdQuestion"></textarea></div><button onclick="saveAcademic()">保存</button></section>
+<div class="field"><label>我最近最想追的一个问题</label><textarea id="phdQuestion"></textarea></div>
+<h3>新增 Master → PhD 记录</h3>
+<div class="grid">
+<div class="third"><div class="field"><label>日期</label><input id="pdate" type="date"></div></div>
+<div class="third"><div class="field"><label>记录类型</label><select id="ptype"><option>项目筛选</option><option>课程/研究团队</option><option>导师</option><option>申请要求</option><option>研究方向</option><option>阅读</option><option>其他</option></select></div></div>
+<div class="third"><div class="field"><label>具体内容</label><input id="pcontent" placeholder="例如：整理 INALCO 中国研究课程"></div></div>
+</div><button onclick="addAcademicLog()">记录</button> <button class="ghost" onclick="saveAcademic()">保存研究问题</button></section>
 
 <section class="card wide" id="football"><h2>⚽ 足球评论 / 小红书</h2><div class="sub">记录每一篇发布及其实际传播数据。</div>
 <div class="grid"><div class="third"><div class="field"><label>发布日期</label><input id="fdate" type="date"></div></div><div class="third"><div class="field"><label>标题</label><input id="ftitle"></div></div><div class="third"><div class="field"><label>点赞收藏数</label><input id="flikes" type="number" min="0" value="0"></div></div>
-<div class="third"><div class="field"><label>浏览量</label><input id="fviews" type="number" min="0" value="0"></div></div><div class="third"><div class="field"><label>评论数</label><input id="fcomments" type="number" min="0" value="0"></div></div></div>
+<div class="third"><div class="field"><label>浏览量</label><input id="fviews" type="number" min="0" value="0"></div></div><div class="third"><div class="field"><label>评论数</label><input id="fcomments" type="number" min="0" value="0"></div></div>
+<div class="third"><div class="field"><label>涨粉数</label><input id="ffollowers" type="number" min="0" value="0"></div></div></div>
 <button onclick="addFootball()">记录一篇</button></section>
 
-<section class="card wide" id="review"><h2>🧭 月度回看</h2><div class="sub">选择月份后，可以看到这个月已经完成的具体内容；点击任何一条记录，可以打开当天的完整内容。</div>
+<section class="card wide" id="review"><h2>🧭 月度回看</h2>
+<div class="sub">先看这个月四条线分别做了什么；点击栏目进入具体记录。复盘评分和月度总结由系统根据你实际记录的投入与产出自动生成。</div>
 <div class="log-toolbar"><label class="sub">月份</label><input id="reviewMonth" type="month"><button class="ghost" onclick="setCurrentMonth()">回到本月</button></div>
-<div class="grid"><div class="third"><div class="sub">本月法语</div><div class="kpi" id="monthFrench">0 h</div></div><div class="third"><div class="sub">本月文章</div><div class="kpi" id="monthArticles">0</div></div><div class="third"><div class="sub">本月足球发布</div><div class="kpi" id="monthFootball">0</div></div></div>
-<h3>本月具体内容</h3><div class="log-list" id="reviewList"></div>
-<h3>研究复盘</h3><div class="field"><label>法语投入：<span id="fv">5</span>/10</label><input id="frenchScore" type="range" min="0" max="10" value="5"></div>
-<div class="field"><label>写作 / 研究：<span id="wv">5</span>/10</label><input id="writingScore" type="range" min="0" max="10" value="5"></div>
-<div class="field"><label>Master / PhD：<span id="av">5</span>/10</label><input id="academicScore" type="range" min="0" max="10" value="5"></div>
-<div class="field"><label>足球账号：<span id="bv">5</span>/10</label><input id="footballScore" type="range" min="0" max="10" value="5"></div>
-<div class="field"><label>本月复盘</label><textarea id="reflection" placeholder="哪些事情让我持续好奇？哪些主题开始重复出现？"></textarea></div><button onclick="saveRadar()">保存本月复盘</button></section>
+
+<div class="review-cats">
+<div class="review-cat" onclick="openCategory('french')"><div class="cat-icon">🇫🇷</div><div><b>法语</b><span id="catFrenchMeta">0 h · 0 次</span></div><div class="cat-arrow">›</div></div>
+<div class="review-cat" onclick="openCategory('writing')"><div class="cat-icon">✍️</div><div><b>写作</b><span id="catWritingMeta">0 篇</span></div><div class="cat-arrow">›</div></div>
+<div class="review-cat" onclick="openCategory('academic')"><div class="cat-icon">🎓</div><div><b>Master → PhD</b><span id="catAcademicMeta">0 条</span></div><div class="cat-arrow">›</div></div>
+<div class="review-cat" onclick="openCategory('football')"><div class="cat-icon">⚽</div><div><b>足球</b><span id="catFootballMeta">0 篇</span></div><div class="cat-arrow">›</div></div>
+</div>
+
+<h3>本月复盘评分</h3>
+<div class="score-grid">
+<div class="score-card"><span>🇫🇷 法语</span><strong id="scoreFrench">—</strong><small id="scoreFrenchReason">等待记录</small></div>
+<div class="score-card"><span>✍️ 写作 / 研究</span><strong id="scoreWriting">—</strong><small id="scoreWritingReason">等待记录</small></div>
+<div class="score-card"><span>🎓 Master → PhD</span><strong id="scoreAcademic">—</strong><small id="scoreAcademicReason">等待记录</small></div>
+<div class="score-card"><span>⚽ 足球</span><strong id="scoreFootball">—</strong><small id="scoreFootballReason">等待记录</small></div>
+</div>
+
+<h3>本月总结</h3>
+<div id="monthlySummary" class="summary-box">选择月份后，这里会根据你的实际记录生成本月进度评价。</div>
+</section>
 </div><footer>数据保存在当前浏览器的 localStorage 中。GitHub Pages 负责托管网页，不会自动跨设备同步。</footer></div>
 
 <div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h2 id="modalTitle"></h2><button class="close" onclick="closeModal()">×</button></div><div id="modalBody" class="detail"></div></div></div>
 
 <script>
 const K='researchOS_2026_2027_v3';let data=JSON.parse(localStorage.getItem(K)||'null');
-if(!data){let o=JSON.parse(localStorage.getItem('researchOS_2026_2027_v2')||localStorage.getItem('researchOS_2026_2027_v1')||'{}');data={hours:o.hours||0,articles:Array.isArray(o.articles)?o.articles:[],themes:o.themes||'',question:o.question||'',today:o.today||{},frenchLogs:o.frenchLogs||[],footballLogs:o.footballLogs||[],radar:o.radar||{}}}
-data.frenchLogs=data.frenchLogs||[];data.footballLogs=data.footballLogs||[];data.articles=Array.isArray(data.articles)?data.articles:[];
-const iso=()=>new Date().toISOString().slice(0,10),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])),br=s=>esc(s).replace(/\n/g,'<br>');
+if(!data){let o=JSON.parse(localStorage.getItem('researchOS_2026_2027_v2')||localStorage.getItem('researchOS_2026_2027_v1')||'{}');data={hours:o.hours||0,articles:Array.isArray(o.articles)?o.articles:[],themes:o.themes||'',question:o.question||'',today:o.today||{},frenchLogs:o.frenchLogs||[],footballLogs:o.footballLogs||[],academicLogs:o.academicLogs||[],radar:o.radar||{}}}
+data.frenchLogs=data.frenchLogs||[];data.footballLogs=data.footballLogs||[];data.academicLogs=data.academicLogs||[];data.articles=Array.isArray(data.articles)?data.articles:[];
+const iso=()=>new Date().toISOString().slice(0,10),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]||m)),br=s=>esc(s).replace(/\n/g,'<br>');
 function save(){localStorage.setItem(K,JSON.stringify(data))}
 function load(){totalHours.textContent=(data.hours||0).toFixed(2)+' h';frenchBar.style.width=Math.min((data.hours||0)/300*100,100)+'%';articleCount.textContent=data.articles.length;themes.value=data.themes||'';phdQuestion.value=data.question||'';todayHours.value=data.today.hours||'';todayWriting.value=data.today.writing||'';todayFootball.value=data.today.football||'';todayFocus.value=data.today.focus||''}
 function addFrench(){let h=+fh.value||0,c=[...document.querySelectorAll('[name=fc]:checked')].map(x=>x.value);if(!h&&!fn.value.trim()&&!c.length&&!fgrammar.value.trim()){alert('至少填写一点今天的学习记录。');return}data.hours+=h;data.frenchLogs.push({id:Date.now(),date:iso(),hours:h,contents:c,grammar:fgrammar.value.trim(),note:fn.value.trim()});save();fh.value='';fgrammar.value='';fn.value='';document.querySelectorAll('[name=fc]').forEach(x=>x.checked=false);load();render()}
 function saveToday(){data.today={date:iso(),hours:todayHours.value,writing:todayWriting.value,football:todayFootball.value,focus:todayFocus.value};save();saveMsg.textContent=' 已保存';setTimeout(()=>saveMsg.textContent='',1200);render()}
 function addArticle(){if(!atitle.value.trim()){alert('请填写标题。');return}data.articles.push({id:Date.now(),title:atitle.value.trim(),date:adate.value||iso(),theme:atheme.value.trim(),region:aregion.value.trim(),question:aquestion.value.trim(),field:afield.value,expand:aexpand.value});save();atitle.value='';adate.value='';atheme.value='';aregion.value='';aquestion.value='';load();render()}
-function addFootball(){if(!ftitle.value.trim()){alert('请填写标题。');return}data.footballLogs.push({id:Date.now(),date:fdate.value||iso(),title:ftitle.value.trim(),likes:+flikes.value||0,views:+fviews.value||0,comments:+fcomments.value||0});save();ftitle.value='';flikes.value=fviews.value=fcomments.value=0;fdate.value='';render()}
+function addAcademicLog(){if(!pcontent.value.trim()){alert('请填写具体内容。');return}data.academicLogs.push({id:Date.now(),date:pdate.value||iso(),type:ptype.value,content:pcontent.value.trim()});save();pcontent.value='';pdate.value='';render()}
+function addFootball(){if(!ftitle.value.trim()){alert('请填写标题。');return}data.footballLogs.push({id:Date.now(),date:fdate.value||iso(),title:ftitle.value.trim(),likes:+flikes.value||0,views:+fviews.value||0,comments:+fcomments.value||0,followers:+ffollowers.value||0});save();ftitle.value='';flikes.value=fviews.value=fcomments.value=ffollowers.value=0;fdate.value='';render()}
 function saveAcademic(){data.question=phdQuestion.value;save()}
-function saveRadar(){let m=reviewMonth.value||iso().slice(0,7);data.radar[m]={french:+frenchScore.value,writing:+writingScore.value,academic:+academicScore.value,football:+footballScore.value,reflection:reflection.value};save()}
 function setCurrentMonth(){reviewMonth.value=iso().slice(0,7);render()}
-function render(){let m=reviewMonth.value||iso().slice(0,7),L=[];let fs=data.frenchLogs.filter(x=>x.date.startsWith(m)),as=data.articles.filter(x=>x.date.startsWith(m)),bs=data.footballLogs.filter(x=>x.date.startsWith(m));monthFrench.textContent=fs.reduce((a,x)=>a+(+x.hours||0),0).toFixed(2)+' h';monthArticles.textContent=as.length;monthFootball.textContent=bs.length;
-fs.forEach(x=>L.push({type:'🇫🇷 法语',date:x.date,title:(x.contents.length?x.contents.join(' + '):'法语学习')+(x.grammar?' · '+x.grammar:''),body:`<div class="detailrow"><b>学习时长</b>${x.hours||0} 小时</div><div class="detailrow"><b>学习内容</b>${esc(x.contents.join('、')||'未分类')}</div><div class="detailrow"><b>当日重点语法</b>${esc(x.grammar||'—')}</div><div class="detailrow"><b>今天具体学了什么</b>${br(x.note||'—')}</div>`}));
-as.forEach(x=>L.push({type:'✍️ 写作',date:x.date,title:x.title,body:`<div class="detailrow"><b>日期</b>${x.date}</div><div class="detailrow"><b>主题</b>${esc(x.theme||'—')}</div><div class="detailrow"><b>涉及地区</b>${esc(x.region||'—')}</div><div class="detailrow"><b>核心问题</b>${esc(x.question||'—')}</div><div class="detailrow"><b>是否有田野材料</b>${esc(x.field)}</div><div class="detailrow"><b>是否值得以后扩展</b>${esc(x.expand)}</div>`}));
-bs.forEach(x=>L.push({type:'⚽ 足球',date:x.date,title:x.title,body:`<div class="detailrow"><b>发布日期</b>${x.date}</div><div class="detailrow"><b>点赞收藏数</b>${x.likes}</div><div class="detailrow"><b>浏览量</b>${x.views}</div><div class="detailrow"><b>评论数</b>${x.comments}</div>`}));
-L.sort((a,b)=>b.date.localeCompare(a.date));window.logs=L;reviewList.innerHTML=L.length?L.map((x,i)=>`<div class="log-item" onclick="openLog(${i})"><div class="log-main"><b>${esc(x.title)}</b><span>${x.type} · ${x.date}</span></div><div class="log-arrow">›</div></div>`).join(''):'<div class="sub">这个月还没有记录。</div>';let r=data.radar[m]||{};frenchScore.value=r.french??5;writingScore.value=r.writing??5;academicScore.value=r.academic??5;footballScore.value=r.football??5;reflection.value=r.reflection||'';fv.textContent=frenchScore.value;wv.textContent=writingScore.value;av.textContent=academicScore.value;bv.textContent=footballScore.value}
-function openLog(i){let x=logs[i];modalTitle.textContent=x.title;modalBody.innerHTML=`<div class="sub">${x.type} · ${x.date}</div>`+x.body;modal.classList.add('show')}function closeModal(){modal.classList.remove('show')}modal.onclick=e=>{if(e.target===modal)closeModal()}
-reviewMonth.value=iso().slice(0,7);load();render();
+function saveRadar(){let m=reviewMonth.value||iso().slice(0,7);data.radar[m]={reflection:reflection?.value||''};save();render()}
+function scoreFor(type,counts){
+  let s=0,reason='';
+  if(type==='french'){let h=counts.hours;if(h>=30)s=10;else if(h>=20)s=9;else if(h>=12)s=8;else if(h>=8)s=7;else if(h>=4)s=6;else if(h>0)s=4;else s=0;reason=h?`${h.toFixed(2)} 小时，记录 ${counts.n} 次`:'本月还没有学习记录'}
+  if(type==='writing'){let n=counts.n;if(n>=8)s=10;else if(n>=5)s=9;else if(n>=3)s=8;else if(n>=2)s=7;else if(n===1)s=5;else s=0;reason=n?`${n} 篇文章 / 研究笔记`:'本月还没有文章记录'}
+  if(type==='academic'){let n=counts.n;if(n>=8)s=10;else if(n>=5)s=9;else if(n>=3)s=8;else if(n>=2)s=7;else if(n===1)s=5;else s=0;reason=n?`${n} 条 Master → PhD 进展记录`:'本月还没有研究/申请记录'}
+  if(type==='football'){let n=counts.n;if(n>=8)s=10;else if(n>=5)s=9;else if(n>=3)s=8;else if(n>=2)s=7;else if(n===1)s=5;else s=0;reason=n?`${n} 篇发布，累计涨粉 ${counts.followers}，浏览 ${counts.views}`:'本月还没有发布记录'}
+  return [s,reason]
+}
+function updateScores(fs,as,ps,bs,m){
+  let sc=scoreFor('french',{hours:fs.reduce((a,x)=>a+(+x.hours||0),0),n:fs.length});
+  scoreFrench.textContent=sc[0]+'/10';scoreFrenchReason.textContent=sc[1];
+  sc=scoreFor('writing',{n:as.length});scoreWriting.textContent=sc[0]+'/10';scoreWritingReason.textContent=sc[1];
+  sc=scoreFor('academic',{n:ps.length});scoreAcademic.textContent=sc[0]+'/10';scoreAcademicReason.textContent=sc[1];
+  sc=scoreFor('football',{n:bs.length,followers:bs.reduce((a,x)=>a+(+x.followers||0),0),views:bs.reduce((a,x)=>a+(+x.views||0),0)});scoreFootball.textContent=sc[0]+'/10';scoreFootballReason.textContent=sc[1];
+  let total=sc[0];let s1=scoreFor('french',{hours:fs.reduce((a,x)=>a+(+x.hours||0),0),n:fs.length})[0],s2=scoreFor('writing',{n:as.length})[0],s3=scoreFor('academic',{n:ps.length})[0],s4=scoreFor('football',{n:bs.length,followers:bs.reduce((a,x)=>a+(+x.followers||0),0),views:bs.reduce((a,x)=>a+(+x.views||0),0)})[0];
+  let avg=((s1+s2+s3+s4)/4).toFixed(1);
+  let parts=[];
+  parts.push(`本月综合进度：${avg}/10。`);
+  if(s1>=8) parts.push(`法语投入很稳定，本月累计 ${fs.reduce((a,x)=>a+(+x.hours||0),0).toFixed(2)} 小时，已经形成持续学习节奏。`);
+  else if(s1>0) parts.push(`法语有记录但投入仍偏低，本月累计 ${fs.reduce((a,x)=>a+(+x.hours||0),0).toFixed(2)} 小时，下一步最值得提高的是稳定性。`);
+  else parts.push('法语本月没有留下记录，建议优先恢复每日学习记录。');
+  if(s2>=8) parts.push(`写作/研究产出较强，本月留下 ${as.length} 篇记录，已经可以开始观察重复出现的研究问题。`);
+  else if(s2>0) parts.push(`写作/研究本月有 ${as.length} 篇记录，但还可以增加连续性，并注意把文章里的问题沉淀成可研究的问题。`);
+  else parts.push('写作/研究本月没有形成文章记录。');
+  if(s3>=8) parts.push(`Master → PhD 规划推进明显，本月有 ${ps.length} 条具体记录。`);
+  else if(s3>0) parts.push(`Master → PhD 已开始推进，本月有 ${ps.length} 条记录；下一步可以从“搜集信息”进一步转向比较项目与导师。`);
+  else parts.push('Master → PhD 本月没有具体进展记录。');
+  let fol=bs.reduce((a,x)=>a+(+x.followers||0),0),views=bs.reduce((a,x)=>a+(+x.views||0),0);
+  if(s4>=8) parts.push(`足球账号保持较好产出：${bs.length} 篇，本月涨粉 ${fol}，累计浏览 ${views}。`);
+  else if(s4>0) parts.push(`足球账号本月发布 ${bs.length} 篇，涨粉 ${fol}、浏览 ${views}；目前更适合继续积累样本，再观察哪些选题真正有效。`);
+  else parts.push('足球账号本月没有发布记录。');
+  parts.push(`总体评价：${avg>=8.5?'四条线推进比较均衡，可以开始提高研究问题的深度。':avg>=6.5?'整体在推进，但四条线之间仍有投入不均衡，建议下月抓住最弱的一条线补齐。':'目前更需要建立稳定记录习惯，而不是同时追求太多产出。'}`);
+  monthlySummary.innerHTML=parts.map(x=>`<p>${esc(x)}</p>`).join('');
+}
+function render(){
+  let m=reviewMonth.value||iso().slice(0,7);
+  let fs=data.frenchLogs.filter(x=>x.date.startsWith(m)),as=data.articles.filter(x=>x.date.startsWith(m)),ps=data.academicLogs.filter(x=>x.date.startsWith(m)),bs=data.footballLogs.filter(x=>x.date.startsWith(m));
+  let fhours=fs.reduce((a,x)=>a+(+x.hours||0),0),followers=bs.reduce((a,x)=>a+(+x.followers||0),0);
+  catFrenchMeta.textContent=`${fhours.toFixed(2)} h · ${fs.length} 次`;catWritingMeta.textContent=`${as.length} 篇`;catAcademicMeta.textContent=`${ps.length} 条`;catFootballMeta.textContent=`${bs.length} 篇 · 涨粉 ${followers}`;
+  updateScores(fs,as,ps,bs,m);
+}
+function openCategory(type){
+  let m=reviewMonth.value||iso().slice(0,7), title='', items=[];
+  if(type==='french'){title='🇫🇷 法语 · 本月具体内容';items=data.frenchLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.contents.length?x.contents.join(' + '):'法语学习',body:`<div class="detailrow"><b>学习时长</b>${x.hours||0} 小时</div><div class="detailrow"><b>学习内容</b>${esc(x.contents.join('、')||'未分类')}</div><div class="detailrow"><b>当日重点语法</b>${esc(x.grammar||'—')}</div><div class="detailrow"><b>今天具体学了什么</b>${br(x.note||'—')}</div>`}))}
+  if(type==='writing'){title='✍️ 写作 · 本月具体内容';items=data.articles.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.title,body:`<div class="detailrow"><b>主题</b>${esc(x.theme||'—')}</div><div class="detailrow"><b>涉及地区</b>${esc(x.region||'—')}</div><div class="detailrow"><b>核心问题</b>${esc(x.question||'—')}</div><div class="detailrow"><b>是否有田野材料</b>${esc(x.field)}</div><div class="detailrow"><b>是否值得以后扩展</b>${esc(x.expand)}</div>`}))}
+  if(type==='academic'){title='🎓 Master → PhD · 本月具体内容';items=data.academicLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.type,body:`<div class="detailrow"><b>具体内容</b>${br(x.content)}</div>`}))}
+  if(type==='football'){title='⚽ 足球 · 本月具体内容';items=data.footballLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.title,body:`<div class="detailrow"><b>点赞收藏数</b>${x.likes}</div><div class="detailrow"><b>浏览量</b>${x.views}</div><div class="detailrow"><b>评论数</b>${x.comments}</div><div class="detailrow"><b>涨粉数</b>${x.followers}</div>`}))}
+  modalTitle.textContent=title;
+  modalBody.innerHTML=items.length?items.sort((a,b)=>b.date.localeCompare(a.date)).map((x,i)=>`<div class="log-item" onclick="showDetail(${JSON.stringify(encodeURIComponent(JSON.stringify(x)))})"><div class="log-main"><b>${esc(x.title)}</b><span>${x.date}</span></div><div class="log-arrow">›</div></div>`).join(''):'<div class="sub">这个月还没有记录。</div>';
+  modal.classList.add('show');
+}
+function showDetail(raw){let x=JSON.parse(decodeURIComponent(raw));modalTitle.textContent=x.title;modalBody.innerHTML=`<div class="sub">${x.date}</div>`+x.body+`<div style="margin-top:16px"><button class="ghost" onclick="openLastCategory()">返回本月分类</button></div>`}
+let lastCategory='';
+function openLastCategory(){closeModal()}
+modal.onclick=e=>{if(e.target===modal)closeModal()}
+function closeModal(){modal.classList.remove('show')}
+reviewMonth.addEventListener('change',render);
+setCurrentMonth();load();render();
 </script></body></html>
