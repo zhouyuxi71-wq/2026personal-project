@@ -60,9 +60,10 @@ footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}@medi
 <div class="field"><label>我最近最想追的一个问题</label><textarea id="phdQuestion"></textarea></div>
 <h3>新增 Master → PhD 记录</h3>
 <div class="grid">
-<div class="third"><div class="field"><label>日期</label><input id="pdate" type="date"></div></div>
+<div class="third"><div class="field"><label>学校名称</label><input id="pschool" placeholder="例如：INALCO"></div></div>
+<div class="third"><div class="field"><label>专业名称</label><input id="pmajor" placeholder="例如：Master Études chinoises"></div></div>
 <div class="third"><div class="field"><label>记录类型</label><select id="ptype"><option>项目筛选</option><option>课程/研究团队</option><option>导师</option><option>申请要求</option><option>研究方向</option><option>阅读</option><option>其他</option></select></div></div>
-<div class="third"><div class="field"><label>具体内容</label><input id="pcontent" placeholder="例如：整理 INALCO 中国研究课程"></div></div>
+<div class="field" style="grid-column:span 12"><label>具体内容</label><input id="pcontent" placeholder="例如：整理该专业的中国社会研究课程与导师"></div>
 </div><button onclick="addAcademicLog()">记录</button> <button class="ghost" onclick="saveAcademic()">保存研究问题</button></section>
 
 <section class="card wide" id="football"><h2>⚽ 足球评论 / 小红书</h2><div class="sub">记录每一篇发布及其实际传播数据。</div>
@@ -107,7 +108,7 @@ function load(){totalHours.textContent=(data.hours||0).toFixed(2)+' h';frenchBar
 function addFrench(){let h=+fh.value||0,c=[...document.querySelectorAll('[name=fc]:checked')].map(x=>x.value);if(!h&&!fn.value.trim()&&!c.length&&!fgrammar.value.trim()){alert('至少填写一点今天的学习记录。');return}data.hours+=h;data.frenchLogs.push({id:Date.now(),date:iso(),hours:h,contents:c,grammar:fgrammar.value.trim(),note:fn.value.trim()});save();fh.value='';fgrammar.value='';fn.value='';document.querySelectorAll('[name=fc]').forEach(x=>x.checked=false);load();render()}
 function saveToday(){data.today={date:iso(),hours:todayHours.value,writing:todayWriting.value,football:todayFootball.value,focus:todayFocus.value};save();saveMsg.textContent=' 已保存';setTimeout(()=>saveMsg.textContent='',1200);render()}
 function addArticle(){if(!atitle.value.trim()){alert('请填写标题。');return}data.articles.push({id:Date.now(),title:atitle.value.trim(),date:adate.value||iso(),theme:atheme.value.trim(),region:aregion.value.trim(),question:aquestion.value.trim(),field:afield.value,expand:aexpand.value});save();atitle.value='';adate.value='';atheme.value='';aregion.value='';aquestion.value='';load();render()}
-function addAcademicLog(){if(!pcontent.value.trim()){alert('请填写具体内容。');return}data.academicLogs.push({id:Date.now(),date:pdate.value||iso(),type:ptype.value,content:pcontent.value.trim()});save();pcontent.value='';pdate.value='';render()}
+function addAcademicLog(){if(!pschool.value.trim()||!pmajor.value.trim()||!pcontent.value.trim()){alert('请至少填写学校名称、专业名称和具体内容。');return}data.academicLogs.push({id:Date.now(),date:iso(),school:pschool.value.trim(),major:pmajor.value.trim(),type:ptype.value,content:pcontent.value.trim()});save();pschool.value='';pmajor.value='';pcontent.value='';render()}
 function addFootball(){if(!ftitle.value.trim()){alert('请填写标题。');return}data.footballLogs.push({id:Date.now(),date:fdate.value||iso(),title:ftitle.value.trim(),likes:+flikes.value||0,views:+fviews.value||0,comments:+fcomments.value||0,followers:+ffollowers.value||0});save();ftitle.value='';flikes.value=fviews.value=fcomments.value=ffollowers.value=0;fdate.value='';render()}
 function saveAcademic(){data.question=phdQuestion.value;save()}
 function setCurrentMonth(){reviewMonth.value=iso().slice(0,7);render()}
@@ -157,7 +158,7 @@ function openCategory(type){
   let m=reviewMonth.value||iso().slice(0,7), title='', items=[];
   if(type==='french'){title='🇫🇷 法语 · 本月具体内容';items=data.frenchLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.contents.length?x.contents.join(' + '):'法语学习',body:`<div class="detailrow"><b>学习时长</b>${x.hours||0} 小时</div><div class="detailrow"><b>学习内容</b>${esc(x.contents.join('、')||'未分类')}</div><div class="detailrow"><b>当日重点语法</b>${esc(x.grammar||'—')}</div><div class="detailrow"><b>今天具体学了什么</b>${br(x.note||'—')}</div>`}))}
   if(type==='writing'){title='✍️ 写作 · 本月具体内容';items=data.articles.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.title,body:`<div class="detailrow"><b>主题</b>${esc(x.theme||'—')}</div><div class="detailrow"><b>涉及地区</b>${esc(x.region||'—')}</div><div class="detailrow"><b>核心问题</b>${esc(x.question||'—')}</div><div class="detailrow"><b>是否有田野材料</b>${esc(x.field)}</div><div class="detailrow"><b>是否值得以后扩展</b>${esc(x.expand)}</div>`}))}
-  if(type==='academic'){title='🎓 Master → PhD · 本月具体内容';items=data.academicLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.type,body:`<div class="detailrow"><b>具体内容</b>${br(x.content)}</div>`}))}
+  if(type==='academic'){title='🎓 Master → PhD · 本月具体内容';items=data.academicLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:`${x.school||'未填写学校'} · ${x.major||'未填写专业'}`,body:`<div class="detailrow"><b>学校名称</b>${esc(x.school||'—')}</div><div class="detailrow"><b>专业名称</b>${esc(x.major||'—')}</div><div class="detailrow"><b>记录类型</b>${esc(x.type||'—')}</div><div class="detailrow"><b>具体内容</b>${br(x.content||'—')}</div>`}))}
   if(type==='football'){title='⚽ 足球 · 本月具体内容';items=data.footballLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.title,body:`<div class="detailrow"><b>点赞收藏数</b>${x.likes}</div><div class="detailrow"><b>浏览量</b>${x.views}</div><div class="detailrow"><b>评论数</b>${x.comments}</div><div class="detailrow"><b>涨粉数</b>${x.followers}</div>`}))}
   modalTitle.textContent=title;
   modalBody.innerHTML=items.length?items.sort((a,b)=>b.date.localeCompare(a.date)).map((x,i)=>`<div class="log-item" onclick="showDetail(${JSON.stringify(encodeURIComponent(JSON.stringify(x)))})"><div class="log-main"><b>${esc(x.title)}</b><span>${x.date}</span></div><div class="log-arrow">›</div></div>`).join(''):'<div class="sub">这个月还没有记录。</div>';
