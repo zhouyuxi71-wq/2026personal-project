@@ -154,19 +154,24 @@ function render(){
   catFrenchMeta.textContent=`${fhours.toFixed(2)} h · ${fs.length} 次`;catWritingMeta.textContent=`${as.length} 篇`;catAcademicMeta.textContent=`${ps.length} 条`;catFootballMeta.textContent=`${bs.length} 篇 · 涨粉 ${followers}`;
   updateScores(fs,as,ps,bs,m);
 }
+let currentCategory='', currentItems=[];
 function openCategory(type){
-  let m=reviewMonth.value||iso().slice(0,7), title='', items=[];
-  if(type==='french'){title='🇫🇷 法语 · 本月具体内容';items=data.frenchLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.contents.length?x.contents.join(' + '):'法语学习',body:`<div class="detailrow"><b>学习时长</b>${x.hours||0} 小时</div><div class="detailrow"><b>学习内容</b>${esc(x.contents.join('、')||'未分类')}</div><div class="detailrow"><b>当日重点语法</b>${esc(x.grammar||'—')}</div><div class="detailrow"><b>今天具体学了什么</b>${br(x.note||'—')}</div>`}))}
-  if(type==='writing'){title='✍️ 写作 · 本月具体内容';items=data.articles.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.title,body:`<div class="detailrow"><b>主题</b>${esc(x.theme||'—')}</div><div class="detailrow"><b>涉及地区</b>${esc(x.region||'—')}</div><div class="detailrow"><b>核心问题</b>${esc(x.question||'—')}</div><div class="detailrow"><b>是否有田野材料</b>${esc(x.field)}</div><div class="detailrow"><b>是否值得以后扩展</b>${esc(x.expand)}</div>`}))}
-  if(type==='academic'){title='🎓 Master → PhD · 本月具体内容';items=data.academicLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:`${x.school||'未填写学校'} · ${x.major||'未填写专业'}`,body:`<div class="detailrow"><b>学校名称</b>${esc(x.school||'—')}</div><div class="detailrow"><b>专业名称</b>${esc(x.major||'—')}</div><div class="detailrow"><b>记录类型</b>${esc(x.type||'—')}</div><div class="detailrow"><b>具体内容</b>${br(x.content||'—')}</div>`}))}
-  if(type==='football'){title='⚽ 足球 · 本月具体内容';items=data.footballLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.title,body:`<div class="detailrow"><b>点赞收藏数</b>${x.likes}</div><div class="detailrow"><b>浏览量</b>${x.views}</div><div class="detailrow"><b>评论数</b>${x.comments}</div><div class="detailrow"><b>涨粉数</b>${x.followers}</div>`}))}
+  currentCategory=type;
+  let m=reviewMonth.value||iso().slice(0,7), title='';
+  if(type==='french'){title='🇫🇷 法语 · 本月具体内容';currentItems=data.frenchLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:(x.contents||[]).length?(x.contents||[]).join(' + '):'法语学习',body:`<div class="detailrow"><b>学习时长</b>${x.hours||0} 小时</div><div class="detailrow"><b>学习内容</b>${esc((x.contents||[]).join('、')||'未分类')}</div><div class="detailrow"><b>当日重点语法</b>${esc(x.grammar||'—')}</div><div class="detailrow"><b>今天具体学了什么</b>${br(x.note||'—')}</div>`}))}
+  if(type==='writing'){title='✍️ 写作 · 本月具体内容';currentItems=data.articles.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.title,body:`<div class="detailrow"><b>主题</b>${esc(x.theme||'—')}</div><div class="detailrow"><b>涉及地区</b>${esc(x.region||'—')}</div><div class="detailrow"><b>核心问题</b>${esc(x.question||'—')}</div><div class="detailrow"><b>是否有田野材料</b>${esc(x.field||'—')}</div><div class="detailrow"><b>是否值得以后扩展</b>${esc(x.expand||'—')}</div>`}))}
+  if(type==='academic'){title='🎓 Master → PhD · 本月具体内容';currentItems=data.academicLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:`${x.school||'未填写学校'} · ${x.major||'未填写专业'}`,body:`<div class="detailrow"><b>学校名称</b>${esc(x.school||'—')}</div><div class="detailrow"><b>专业名称</b>${esc(x.major||'—')}</div><div class="detailrow"><b>记录类型</b>${esc(x.type||'—')}</div><div class="detailrow"><b>具体内容</b>${br(x.content||'—')}</div>`}))}
+  if(type==='football'){title='⚽ 足球 · 本月具体内容';currentItems=data.footballLogs.filter(x=>x.date.startsWith(m)).map(x=>({date:x.date,title:x.title,body:`<div class="detailrow"><b>点赞收藏数</b>${x.likes||0}</div><div class="detailrow"><b>浏览量</b>${x.views||0}</div><div class="detailrow"><b>评论数</b>${x.comments||0}</div><div class="detailrow"><b>涨粉数</b>${x.followers||0}</div>`}))}
   modalTitle.textContent=title;
-  modalBody.innerHTML=items.length?items.sort((a,b)=>b.date.localeCompare(a.date)).map((x,i)=>`<div class="log-item" onclick="showDetail(${JSON.stringify(encodeURIComponent(JSON.stringify(x)))})"><div class="log-main"><b>${esc(x.title)}</b><span>${x.date}</span></div><div class="log-arrow">›</div></div>`).join(''):'<div class="sub">这个月还没有记录。</div>';
+  modalBody.innerHTML=currentItems.length?currentItems.sort((a,b)=>b.date.localeCompare(a.date)).map((x,i)=>`<div class="log-item" onclick="showDetail(${i})"><div class="log-main"><b>${esc(x.title)}</b><span>${x.date}</span></div><div class="log-arrow">›</div></div>`).join(''):'<div class="sub">这个月还没有记录。</div>';
   modal.classList.add('show');
 }
-function showDetail(raw){let x=JSON.parse(decodeURIComponent(raw));modalTitle.textContent=x.title;modalBody.innerHTML=`<div class="sub">${x.date}</div>`+x.body+`<div style="margin-top:16px"><button class="ghost" onclick="openLastCategory()">返回本月分类</button></div>`}
-let lastCategory='';
-function openLastCategory(){closeModal()}
+function showDetail(i){
+  const x=currentItems[i];
+  if(!x)return;
+  modalTitle.textContent=x.title;
+  modalBody.innerHTML=`<div class="sub">记录日期：${esc(x.date)}</div><div style="margin-top:14px">${x.body}</div><div style="margin-top:18px"><button class="ghost" onclick="openCategory(currentCategory)">← 返回本月记录</button></div>`;
+}
 modal.onclick=e=>{if(e.target===modal)closeModal()}
 function closeModal(){modal.classList.remove('show')}
 reviewMonth.addEventListener('change',render);
