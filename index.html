@@ -75,7 +75,7 @@ footer{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}@medi
 <div class="third"><div class="field"><label>浏览量</label><input id="fviews" type="number" min="0" value="0"></div></div><div class="third"><div class="field"><label>评论数</label><input id="fcomments" type="number" min="0" value="0"></div></div>
 <div class="third"><div class="field"><label>粉丝数（当前）</label><input id="ffollowers" type="number" min="0" value="0"></div></div></div>
 <button onclick="addFootball()">记录一篇</button>
-<h3>话题 / 俱乐部推送转化比</h3><div class="sub">转化比 =（评论数 + 点赞收藏数）÷ 推送数。按话题 / 俱乐部汇总，统计当前已记录的全部推送。</div>
+<h3>话题 / 俱乐部推送转化比</h3><div class="sub">转化比 =（评论数 + 点赞收藏数）÷ 浏览量。按话题 / 俱乐部汇总，统计当前已记录的全部推送。</div>
 <div id="topicStats"></div></section>
 
 <section class="card wide" id="review"><h2>🧭 月度回看</h2>
@@ -152,9 +152,9 @@ modalBody.innerHTML=`<div class="sub">记录日期：${esc(x.date)}</div><div st
 modal.classList.add('show');
 }
 function renderTopicStats(){
-let groups={};data.footballLogs.forEach(x=>{let t=(x.topic||'未分类').trim()||'未分类';if(!groups[t])groups[t]={posts:0,likes:0,comments:0};groups[t].posts++;groups[t].likes+=+x.likes||0;groups[t].comments+=+x.comments||0});
-let rows=Object.entries(groups).sort((a,b)=>b[1].posts-a[1].posts).map(([t,g])=>{let ratio=(g.comments+g.likes)/g.posts;return `<tr><td>${esc(t)}</td><td>${g.posts}</td><td>${g.likes}</td><td>${g.comments}</td><td>${ratio.toFixed(2)}</td><td>${(ratio*100).toFixed(1)}%</td></tr>`}).join('');
-let legacy=data.footballLogs.filter(x=>x.legacyFollowerGrowth&&!(+x.followers||0)).length;let legacyNote=legacy?`<div class="topic-empty">有 ${legacy} 条历史记录原本记录的是“涨粉数”，已保留为历史字段；请在需要时重新补录这些推送发布时的当前粉丝数。</div>`:'';topicStats.innerHTML=rows?`${legacyNote}<table class="topic-table"><thead><tr><th>话题 / 俱乐部</th><th>推送数</th><th>点赞收藏</th><th>评论</th><th>转化比</th><th>百分比</th></tr></thead><tbody>${rows}</tbody></table>`:'<div class="topic-empty">还没有足球推送记录。添加记录后，这里会自动按俱乐部 / 话题汇总。</div>';
+let groups={};data.footballLogs.forEach(x=>{let t=(x.topic||'未分类').trim()||'未分类';if(!groups[t])groups[t]={posts:0,views:0,likes:0,comments:0};groups[t].posts++;groups[t].views+=+x.views||0;groups[t].likes+=+x.likes||0;groups[t].comments+=+x.comments||0});
+let rows=Object.entries(groups).sort((a,b)=>b[1].posts-a[1].posts).map(([t,g])=>{let ratio=g.views?(g.comments+g.likes)/g.views:0;return `<tr><td>${esc(t)}</td><td>${g.views}</td><td>${g.likes}</td><td>${g.comments}</td><td>${ratio.toFixed(4)}</td><td>${(ratio*100).toFixed(2)}%</td></tr>`}).join('');
+let legacy=data.footballLogs.filter(x=>x.legacyFollowerGrowth&&!(+x.followers||0)).length;let legacyNote=legacy?`<div class="topic-empty">有 ${legacy} 条历史记录原本记录的是“涨粉数”，已保留为历史字段；请在需要时重新补录这些推送发布时的当前粉丝数。</div>`:'';topicStats.innerHTML=rows?`${legacyNote}<table class="topic-table"><thead><tr><th>话题 / 俱乐部</th><th>浏览量</th><th>点赞收藏</th><th>评论</th><th>转化比</th><th>百分比</th></tr></thead><tbody>${rows}</tbody></table>`:'<div class="topic-empty">还没有足球推送记录。添加记录后，这里会自动按俱乐部 / 话题汇总。</div>';
 }
 function render(){
 let m=reviewMonth.value||iso().slice(0,7),fs=data.frenchLogs.filter(x=>x.date.startsWith(m)),as=data.articles.filter(x=>x.date.startsWith(m)),ps=data.academicLogs.filter(x=>x.date.startsWith(m)),bs=data.footballLogs.filter(x=>x.date.startsWith(m));
