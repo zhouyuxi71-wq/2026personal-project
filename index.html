@@ -148,8 +148,27 @@ window.academicDisplayItems=items;
 function openAcademicDetail(i){
 let x=window.academicDisplayItems?.[i];if(!x)return;
 modalTitle.textContent=`${x.school||'未填写学校'} · ${x.major||'未填写专业/导师'}`;
-modalBody.innerHTML=`<div class="sub">记录日期：${esc(x.date)}</div><div style="margin-top:14px"><div class="detailrow"><b>学校名称</b>${esc(x.school||'—')}</div><div class="detailrow"><b>专业名称 / 导师名</b>${esc(x.major||'—')}</div><div class="detailrow"><b>记录类型</b>${esc(x.type||'—')}</div><div class="detailrow"><b>具体内容</b>${br(x.content||'—')}</div></div>`;
+modalBody.innerHTML=`<div class="sub">记录日期：${esc(x.date)}</div><div style="margin-top:14px"><div class="detailrow"><b>学校名称</b>${esc(x.school||'—')}</div><div class="detailrow"><b>专业名称 / 导师名</b>${esc(x.major||'—')}</div><div class="detailrow"><b>记录类型</b>${esc(x.type||'—')}</div><div class="detailrow"><b>具体内容</b>${br(x.content||'—')}</div></div><div class="row" style="margin-top:20px"><button onclick="editAcademicLog(${i})">编辑记录</button><button class="ghost" onclick="deleteAcademicLog(${i})">删除记录</button></div>`;
 modal.classList.add('show');
+}
+function editAcademicLog(i){
+ const x=window.academicDisplayItems?.[i];if(!x)return;
+ modalTitle.textContent='编辑 Master → PhD 记录';
+ const types=['项目筛选','课程/研究团队','导师','申请要求','研究方向','阅读','其他'];
+ modalBody.innerHTML=`<div class="field"><label>学校名称</label><input id="editPSchool" value="${esc(x.school||'')}"></div><div class="field"><label>专业名称 / 导师名</label><input id="editPMajor" value="${esc(x.major||'')}"></div><div class="field"><label>记录类型</label><select id="editPType">${types.concat(types.includes(x.type)?[]:[x.type].filter(Boolean)).map(t=>`<option value="${esc(t)}" ${t===x.type?'selected':''}>${esc(t)}</option>`).join('')}</select></div><div class="field"><label>具体内容</label><textarea id="editPContent" rows="6">${esc(x.content||'')}</textarea></div><div class="row"><button onclick="saveAcademicEdit(${i})">保存修改</button><button class="ghost" onclick="openAcademicDetail(${i})">取消</button></div>`;
+ modal.classList.add('show');
+}
+function saveAcademicEdit(i){
+ const x=window.academicDisplayItems?.[i];if(!x)return;
+ const school=document.getElementById('editPSchool').value.trim(),major=document.getElementById('editPMajor').value.trim(),content=document.getElementById('editPContent').value.trim(),type=document.getElementById('editPType').value;
+ if(!school||!major||!content){alert('请至少填写学校名称、专业名称/导师名和具体内容。');return}
+ const idx=data.academicLogs.indexOf(x);if(idx<0){alert('找不到原始记录，请刷新页面后重试。');return}
+ Object.assign(data.academicLogs[idx],{school,major,type,content});save();render();closeModal();
+}
+function deleteAcademicLog(i){
+ const x=window.academicDisplayItems?.[i];if(!x||!confirm('确定删除这条 Master → PhD 记录吗？删除后无法撤销。'))return;
+ const idx=data.academicLogs.indexOf(x);if(idx<0)return;
+ data.academicLogs.splice(idx,1);save();render();closeModal();
 }
 function renderTopicStats(){
 let groups={};data.footballLogs.forEach(x=>{let t=(x.topic||'未分类').trim()||'未分类';if(!groups[t])groups[t]={posts:0,views:0,likes:0,comments:0};groups[t].posts++;groups[t].views+=+x.views||0;groups[t].likes+=+x.likes||0;groups[t].comments+=+x.comments||0});
